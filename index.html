@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Creatinine Clearance Calculator</title>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .table-container {
+      margin: 0 20px;
+    }
+
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 600px;  
+      font-size: 24px;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    input[type="number"] {
+      width: 100px;
+      font-size: 24px;
+     
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 28px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result-table {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .result-table th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .result-table td {
+      padding: 20px;
+    }
+
+    p {
+      font-size: 24px;
+    }
+
+    body {
+      font-size: 24px;    
+    }
+  </style>
+  <script>
+    function calculateCreatinineClearance() {
+      // Get input values
+      var serumCreatinine = parseFloat(document.getElementById('serum-creatinine').value);
+      var age = parseInt(document.getElementById('age').value);
+      var weight = parseFloat(document.getElementById('weight').value);
+      var sex = document.getElementById('sex').value;
+
+      // Calculate creatinine clearance
+      var creatinineClearance;
+      if (sex === 'male') {
+        creatinineClearance = ((140 - age) * weight) / (serumCreatinine * 72);
+      } else {
+        creatinineClearance = ((140 - age) * weight * 0.85) / (serumCreatinine * 72);
+      }
+
+      // Display the result with disclaimer and explanation
+      var result = "Creatinine Clearance: " + creatinineClearance.toFixed(2) + " mL/min";
+      result += "<br><em>Note: This calculation is an estimate and should be interpreted by a healthcare professional.</em>";
+      result += "<br><br><strong>What is Creatinine Clearance?</strong>";
+      result += "<br>Creatinine clearance is a measure of kidney function. It estimates the rate at which the kidneys are able to filter creatinine, a waste product produced by muscle metabolism, from the blood.";
+      result += "<br><br><strong>How is Creatinine Clearance Calculated?</strong>";
+      result += "<br>Creatinine clearance is calculated using the serum creatinine level, age, weight, and sex. The formula used is based on the Cockcroft-Gault equation, which takes into account the age, weight, and sex-adjusted creatinine clearance.";
+      result += "<br><br><strong>What Does the Result Indicate?</strong>";
+      result += "<br>A higher creatinine clearance value indicates better kidney function, as it suggests that the kidneys are able to filter creatinine efficiently. A lower creatinine clearance value may indicate impaired kidney function or decreased filtration capacity.";
+      document.getElementById('result').innerHTML = result;
+    }
+  </script>
+</head>
+<body>
+  <h1>Creatinine Clearance Calculator</h1>
+  <div>
+    <label for="serum-creatinine">Serum Creatinine (mg/dL):</label>
+    <input type="number" id="serum-creatinine" step="0.01" required>
+  </div>
+  <div>
+    <label for="age">Age:</label>
+    <input type="number" id="age" required>
+  </div>
+  <div>
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" step="0.01" required>
+  </div>
+  <div>
+    <label for="sex">Sex:</label>
+    <select id="sex" required>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+  </div>
+  <button onclick="calculateCreatinineClearance()">Calculate</button>
+  <p id="result"></p>
+</body>
+</html>
+
+
